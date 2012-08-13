@@ -28,6 +28,12 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
+    on property:init.svc.wpa_supplicant=stopped
+        stop dhcpcd
+
+    on property:init.svc.p2p_supplicant=stopped
+        stop dhcpcd
+
 on boot
     # CyanogenMod SysFS entries
     chown radio system /sys/module/gpio_event/parameters/phone_call_status
